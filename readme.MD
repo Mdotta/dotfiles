@@ -28,7 +28,7 @@ This repo is intended to be cloned onto a new machine and installed via a single
 Choose a location for your dotfiles (example uses `~/dotfiles`):
 
 ```sh
-git clone <YOUR_REPO_URL_HERE> ~/dotfiles
+git clone git@github.com:Mdotta/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
