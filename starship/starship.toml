@@ -9,6 +9,7 @@ $directory\
 [](bg:yellow fg:peach)\
 $git_branch\
 $git_status\
+$git_metrics\
 [](fg:yellow bg:green)\
 $c\
 $rust\
@@ -69,11 +70,12 @@ truncation_length = 3
 truncation_symbol = "…/"
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
+"documents" = "󰈙 "
+"downloads" = " "
+"music" = "󰝚 "
+"pictures" = " "
+"code" = "󰲋"
+
 
 [git_branch]
 symbol = ""
@@ -83,6 +85,14 @@ format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
 [git_status]
 style = "bg:yellow"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
+
+[git_metrics]
+added_style = "bold teal bg:yellow"
+deleted_style = "bold maroon bg:yellow"
+only_nonzero_diffs = true
+format = "([+$added ]($added_style))([-$deleted ]($deleted_style))"
+disabled = false
+ignore_submodules = false
 
 [nodejs]
 symbol = ""
