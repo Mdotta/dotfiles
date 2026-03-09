@@ -1,4 +1,4 @@
-
+alias d-c='docker compose'
 
 reload_ssh(){
   eval "$(ssh-agent -s)"
