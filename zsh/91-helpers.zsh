@@ -1,4 +1,5 @@
 alias d-c='docker compose'
+alias gs='git status'
 
 reload_ssh(){
   eval "$(ssh-agent -s)"
