@@ -53,3 +53,10 @@ gopen(){
 
   open $full_url
 }
+
+fuzzy() {
+  local -a cmd=( "$@" )
+  local sel
+  sel="$(command "${cmd[@]}" | fzf)" || return $?
+  printf '%s\n' "$sel"
+}
