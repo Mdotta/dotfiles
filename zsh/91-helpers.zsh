@@ -20,6 +20,7 @@ gacp(){
 
 gopen(){
   local add_pipelines=0
+  local add_branch=0
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -27,13 +28,17 @@ gopen(){
         add_pipelines=1
         shift
         ;;
+      -b|--branch)
+        add_branch=1
+        shift
+        ;;
       -h|--help)
-        echo 'Usage: gopen [-p|--pipelines]'
+        echo 'Usage: gopen [-p|--pipelines] [-b|--branch]'
         return 0
         ;;
       *)
         echo "Unknown option: $1"
-        echo 'Usage: gopen [-p|--pipelines]'
+        echo 'Usage: gopen [-p|--pipelines] [-b|--branch]'
         return 1
         ;;
     esac
@@ -47,11 +52,22 @@ gopen(){
   repo_path="${repo_path%.git}"       # remove trailing .git
 
   local full_url="https://$host/$repo_path"
+  if ((add_branch)); then
+    local branch
+    branch="$(git branch --show-current)"
+    if [[ -n "$branch" ]]; then
+      full_url="$full_url/tree/$branch"
+    else
+      echo 'Could not determine current branch.'
+      return 1
+    fi
+  fi
+
   if ((add_pipelines)); then
     full_url="$full_url/pipelines"
   fi
 
-  open $full_url
+  open "$full_url"
 }
 
 fuzzy() {
