@@ -18,6 +18,30 @@ gacp(){
   git add . && git commit -m "$message" && git push
 }
 
+gnt(){
+  local branch_name="$1"
+
+  if [[ -z "$branch_name" ]]; then
+    echo 'Usage: gnt <branch-name>'
+    return 1
+  fi
+
+  git rev-parse --show-toplevel >/dev/null 2>&1 || {
+    echo 'Run this inside a git repository.'
+    return 1
+  }
+
+  git check-ref-format --branch "$branch_name" >/dev/null 2>&1 || {
+    echo "Invalid branch name: $branch_name"
+    return 1
+  }
+
+  git checkout master && \
+    git pull origin master && \
+    git checkout -b "$branch_name" && \
+    git push -u origin "$branch_name"
+}
+
 gopen(){
   local add_pipelines=0
   local add_branch=0
