@@ -39,7 +39,7 @@ gnt(){
   git checkout master && \
     git pull origin master && \
     git checkout -b "$branch_name" && \
-    git push -u origin "$branch_name"
+    git push -u origin "$branch_name" -o ci.skip
 }
 
 gopen(){
